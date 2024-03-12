@@ -5,3 +5,21 @@ N$ of them resolves to true?
 The program in this repository attempts to answer this question. The solution
 is based on <https://math.stackexchange.com/a/4695443/197924>.
 
+The first part of the solution is pretty straight forward. The second part may
+need some explanation. For clarity, instead of 6, suppose we want at least $n$
+elements. We will use the notation $g(m, n)$ here. If $g(m, n)$ is the
+probability of $n$ or more resolving to true, then:
+
+$g(m, n) = P(m)g(m - 1, n - 1) + (1 - P(m))g(m - 1, n)$
+
+But $g(m - 1, n - 1) = f(m - 1, n - 1) + g(m - 1, n)$.
+
+Thus:
+
+$$\begin{aligned}
+  g(m, n) &= P(m)g(m - 1, n - 1) + (1 - P(m))g(m - 1, n) \\
+          &= P(m)(f(m - 1, n - 1) + g(m - 1, n)) + (1 - P(m))g(m - 1, n) \\
+          &= P(m)f(m - 1, n - 1) + P(m)g(m - 1, n) + g(m - 1, n) - P(m)g(m - 1, n) \\
+          &= P(m)f(m - 1, n - 1) + g(m - 1, n)
+\end{aligned}$$
+
