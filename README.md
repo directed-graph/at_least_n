@@ -1,4 +1,6 @@
 
+[![Integrate](https://github.com/directed-graph/at_least_n/actions/workflows/integrate.yaml/badge.svg)](https://github.com/directed-graph/at_least_n/actions/workflows/integrate.yaml)
+
 Given a list of $N$ probabilities, what is the probability that at least $n \le
 N$ of them resolves to true?
 
