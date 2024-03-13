@@ -14,7 +14,10 @@ probability of $n$ or more resolving to true, then:
 
 $g(m, n) = P(m)g(m - 1, n - 1) + (1 - P(m))g(m - 1, n)$
 
-But $g(m - 1, n - 1) = f(m - 1, n - 1) + g(m - 1, n)$.
+But $g(m - 1, n - 1) = f(m - 1, n - 1) + g(m - 1, n)$ (i.e. the probability of
+items $0$ through $m - 1$ having at least $n - 1$ resolving to true is equal to
+the probability of exactly $n - 1$ resolving to true, plus the probability of
+$n$ or more resolving to true).
 
 Thus:
 
