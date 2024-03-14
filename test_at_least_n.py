@@ -8,7 +8,7 @@ from typing import Iterable
 
 
 @dataclasses.dataclass
-class Parameters:
+class Parameter:
   probabilities: Iterable[float]
   n: int
   expected_probability: float
@@ -20,29 +20,29 @@ class TestAtLeastN(unittest.TestCase):
   Run with: `python -m unittest --verbose`.
   """
   parameters = [
-      Parameters([0], 2, 0.0),
-      Parameters([1], 2, 0.0),
-      Parameters([1], 1, 1.0),
-      Parameters([0.5], 1, 0.5),
-      Parameters([1, 0], 1, 1.0),
-      Parameters([1, 0], 2, 0.0),
-      Parameters([1, 1], 1, 1.0),
-      Parameters([0.5, 0.5, 0.5], 2, 0.5),
-      Parameters([0.5, 0.5, 0.5], 3, 0.125),
-      Parameters([1, 0, 0], 1, 1.0),
-      Parameters([1, 0, 0], 2, 0.0),
-      Parameters([1, 1, 0], 1, 1.0),
-      Parameters([1, 1, 1], 1, 1.0),
-      Parameters([0.5, 0.5, 0.5, 0.5], 1, 0.9375),
-      Parameters([1, 1, 1, 0.5], 4, 0.5),
-      Parameters([1, 1, 1, 0.5, 0.5], 5, 0.25),
-      Parameters([1, 1, 1, 0.5, 0.5, 0], 5, 0.25),
-      Parameters([1, 1, 1, 0.5, 0.5, 0.5], 5, 0.5),
-      Parameters([1, 1, 1, 0.9, 0.2, 0], 5, 0.18),
-      Parameters([1, 1, 1, 0.9, 0.2, 0.1], 5, 0.254),
+      Parameter([0], 2, 0.0),
+      Parameter([1], 2, 0.0),
+      Parameter([1], 1, 1.0),
+      Parameter([0.5], 1, 0.5),
+      Parameter([1, 0], 1, 1.0),
+      Parameter([1, 0], 2, 0.0),
+      Parameter([1, 1], 1, 1.0),
+      Parameter([0.5, 0.5, 0.5], 2, 0.5),
+      Parameter([0.5, 0.5, 0.5], 3, 0.125),
+      Parameter([1, 0, 0], 1, 1.0),
+      Parameter([1, 0, 0], 2, 0.0),
+      Parameter([1, 1, 0], 1, 1.0),
+      Parameter([1, 1, 1], 1, 1.0),
+      Parameter([0.5, 0.5, 0.5, 0.5], 1, 0.9375),
+      Parameter([1, 1, 1, 0.5], 4, 0.5),
+      Parameter([1, 1, 1, 0.5, 0.5], 5, 0.25),
+      Parameter([1, 1, 1, 0.5, 0.5, 0], 5, 0.25),
+      Parameter([1, 1, 1, 0.5, 0.5, 0.5], 5, 0.5),
+      Parameter([1, 1, 1, 0.9, 0.2, 0], 5, 0.18),
+      Parameter([1, 1, 1, 0.9, 0.2, 0.1], 5, 0.254),
   ]
 
-  def _test_parameter(self, parameter: Parameters) -> None:
+  def _test_parameter(self, parameter: Parameter) -> None:
     """Tests at_least_n with the given parameter."""
     self.assertAlmostEqual(
         at_least_n.at_least_n(parameter.probabilities, parameter.n),
@@ -58,7 +58,7 @@ class TestAtLeastN(unittest.TestCase):
     """Verifies all permutations of items in `parameters` are correct."""
     for parameter in self.parameters:
       for probabilities in set(itertools.permutations(parameter.probabilities)):
-        sub_parameter = Parameters(**dataclasses.asdict(parameter))
+        sub_parameter = Parameter(**dataclasses.asdict(parameter))
         sub_parameter.probabilities = probabilities
         with self.subTest(sub_parameter):
           self._test_parameter(sub_parameter)
@@ -67,7 +67,7 @@ class TestAtLeastN(unittest.TestCase):
     """Verifies all permutations of iter items in `parameters` are correct."""
     for parameter in self.parameters:
       for probabilities in set(itertools.permutations(parameter.probabilities)):
-        sub_parameter = Parameters(**dataclasses.asdict(parameter))
+        sub_parameter = Parameter(**dataclasses.asdict(parameter))
         sub_parameter.probabilities = iter(probabilities)
         with self.subTest(sub_parameter):
           self._test_parameter(sub_parameter)
